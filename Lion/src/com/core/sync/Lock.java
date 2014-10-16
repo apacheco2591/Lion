@@ -5,6 +5,7 @@ public class Lock {
 	private boolean isLocked = false;
 
 	public synchronized void lock() throws InterruptedException{
+		//System.out.println("lock");
 		while(isLocked){
 			wait();
 		} 
@@ -12,6 +13,7 @@ public class Lock {
 	}
 	
 	public synchronized void unlock(){
+		//System.out.println("Unlock);
 		isLocked = false;
 		notify();
 	}
