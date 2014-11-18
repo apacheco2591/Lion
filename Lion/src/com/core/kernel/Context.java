@@ -2,19 +2,26 @@ package com.core.kernel;
 
 import java.util.HashMap;
 
-import com.core.process.Node;
-import com.core.process.Tree;
 import com.core.sync.Lock;
+import com.core.utilities.Console;
 
 public class Context {
 	
+	Lock lockContext;
 	HashMap<String, Lock> listLock;
-	Tree tree;
+	Console consolaPrincipal;
+	int kill;
 	
-	public Context(HashMap<String, Lock> listLock, Tree tree) {
+	public Context(Lock lockContext, HashMap<String, Lock> listLock, Console con) {
 		super();
+		this.lockContext = lockContext;
 		this.listLock = listLock;
-		this.tree = tree;
+		this.consolaPrincipal = con;
+		this.kill = 0;
+	}
+	
+	public Lock getLockContext() {
+		return this.lockContext;
 	}
 	
 	public void addLock(String key, Lock lock) {
@@ -28,13 +35,9 @@ public class Context {
 	public HashMap<String, Lock> getListLock() {
 		return listLock;
 	}
-
-	public Tree getTree() {
-		return tree;
-	}
 	
-	public Node getNode(int pid) {
-		return this.tree.getLeaf(pid);
+	public Console getConsola() {
+		return this.consolaPrincipal;
 	}
 	
 }
